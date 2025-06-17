@@ -16,8 +16,10 @@ const RegisterForm = ({ state }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long");
+    if (!name.trim() || !email.trim() || !password.trim()) return;
+
+    if (password.length < 7) {
+      setError("Password must be at least 7 characters long");
       return;
     }
 
@@ -114,7 +116,9 @@ const RegisterForm = ({ state }) => {
             }`}
             type="submit"
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={
+              !name.trim() || !email.trim() || !password.trim() || loading
+            }
           >
             {loading ? "Creating..." : "Create Account"}
           </button>
