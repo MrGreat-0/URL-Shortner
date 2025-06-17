@@ -13,7 +13,7 @@ const LoginForm = ({ state }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = async () => {
-    if (email.trim() || password.trim()) return;
+    if (!email.trim() || !password.trim()) return;
 
     setLoading(true);
     setError("");
@@ -84,7 +84,7 @@ const LoginForm = ({ state }) => {
             }`}
             type="submit"
             onClick={handleSubmit}
-            disabled={email.trim() || password.trim() || loading}
+            disabled={!email.trim() || !password.trim() || loading}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
