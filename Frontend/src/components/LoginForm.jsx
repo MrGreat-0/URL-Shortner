@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../api/user.api";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../store/slice/authSlice.js";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -11,10 +11,10 @@ const LoginForm = ({ state }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  // console.log(auth);
 
   const handleSubmit = async () => {
+    if (email.trim() || password.trim()) return;
+
     setLoading(true);
     setError("");
 
@@ -84,7 +84,7 @@ const LoginForm = ({ state }) => {
             }`}
             type="submit"
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={email.trim() || password.trim() || loading}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
