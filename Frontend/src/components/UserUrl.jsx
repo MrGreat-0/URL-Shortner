@@ -107,14 +107,14 @@ const UserUrl = () => {
                 <td className="px-6 py-4">
                   <div className="text-sm">
                     <a
-                      href={`${import.meta.env.VITE_BACKEND_URL}/${
+                      href={`${import.meta.env.VITE_API_BASE_URL}/${
                         url.short_url
                       }`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-900 hover:underline"
                     >
-                      {`${import.meta.env.VITE_BACKEND_URL}/${url.short_url}`}
+                      {`${import.meta.env.VITE_API_BASE_URL}/${url.short_url}`}
                     </a>
                   </div>
                 </td>
@@ -130,7 +130,7 @@ const UserUrl = () => {
                     type="button"
                     onClick={() =>
                       handleCopy(
-                        `${import.meta.env.VITE_BACKEND_URL}/${url.short_url}`,
+                        `${import.meta.env.VITE_API_BASE_URL}/${url.short_url}`,
                         url._id
                       )
                     }
