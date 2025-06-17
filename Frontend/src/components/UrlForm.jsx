@@ -58,13 +58,18 @@ const UrlForm = () => {
       <button
         onClick={handleSubmit}
         type="submit"
-        className={`w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 ${
+        className={`w-full h-10 flex items-center justify-center bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 ${
           loading ? "cursor-not-allowed" : ""
         }`}
         disabled={loading}
       >
-        {loading ? "Shortening..." : "Shorten URL"}
+        {loading ? (
+          <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+        ) : (
+          "Shorten URL"
+        )}
       </button>
+
       {error && (
         <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
           {error}
