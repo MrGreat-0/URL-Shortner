@@ -10,15 +10,19 @@ const UrlForm = () => {
   const [error, setError] = useState(null);
   const [customSlug, setCustomSlug] = useState("");
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const short_url = await createShortUrl(url, customSlug);
       setShortUrl(short_url);
       queryClient.invalidateQueries({ queryKey: ["userUrls"] });
       setError(null);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,9 +58,12 @@ const UrlForm = () => {
       <button
         onClick={handleSubmit}
         type="submit"
-        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+        className={`w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 ${
+          loading ? "cursor-not-allowed" : ""
+        }`}
+        disabled={loading}
       >
-        Shorten URL
+        {loading ? "Shortening..." : "Shorten URL"}
       </button>
       {error && (
         <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">
