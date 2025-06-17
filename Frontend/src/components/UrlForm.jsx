@@ -14,6 +14,7 @@ const UrlForm = () => {
 
   const handleSubmit = async () => {
     try {
+      if (!url.trim()) return;
       setLoading(true);
       const short_url = await createShortUrl(url, customSlug);
       setShortUrl(short_url);
@@ -61,7 +62,7 @@ const UrlForm = () => {
         className={`w-full h-10 flex items-center justify-center bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 ${
           loading ? "cursor-not-allowed" : ""
         }`}
-        disabled={loading}
+        disabled={!url.trim() || loading}
       >
         {loading ? (
           <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
