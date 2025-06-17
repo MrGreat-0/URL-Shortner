@@ -87,3 +87,9 @@ Also make sure you have a `.env` file (see [Frontend/README.md](https://github.c
 - 🚫 Add rate limiting on URL creation (per IP or user)
 - ⏳ Add expiration time for short URLs (for unauthenticated users)
 - 🛠️ Add admin panel to manage all links (view, delete, moderate)
+
+## 🌐 Visit the App
+
+You can try out the live demo of URL Shortener here:
+
+🔗 **[URL Shortener Live Demo](https://urlshortner-jet.vercel.app/)**
