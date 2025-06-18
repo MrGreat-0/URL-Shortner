@@ -6,6 +6,7 @@ import { routeTree } from "./routing/routeTree.js";
 import store from "./store/store.js";
 import { Provider } from "react-redux";
 import AuthLoader from "./components/AuthLoader.jsx";
+import Spinner from "./components/Spinner.jsx";
 
 export const queryClient = new QueryClient();
 const router = createRouter({
@@ -20,7 +21,7 @@ createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <AuthLoader>
-        <RouterProvider router={router} />
+        <RouterProvider router={router} defaultPendingComponent={Spinner} />
       </AuthLoader>
     </QueryClientProvider>
   </Provider>

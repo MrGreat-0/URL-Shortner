@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login, logout } from "../store/slice/authSlice";
 import { getCurrentUser } from "../api/user.api";
+import Spinner from "./Spinner";
 
 const AuthLoader = ({ children }) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -13,13 +15,15 @@ const AuthLoader = ({ children }) => {
         dispatch(login(data));
       } catch (err) {
         dispatch(logout());
+      } finally {
+        setLoading(false);
       }
     };
 
     checkAuth();
   }, []);
 
-  return children;
+  return <>{loading ? <Spinner /> : children}</>;
 };
 
 export default AuthLoader;
