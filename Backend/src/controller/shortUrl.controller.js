@@ -1,4 +1,4 @@
-import { getShortUrl } from "../dao/shortUrl.js";
+import { getShortUrl, deleteShortUrlById } from "../dao/shortUrl.js";
 import { createShortUrlServiceWithoutUser, createShortUrlServiceWithUser } from "../services/shortUrl.service.js";
 import wrapAsync from "../utils/tryCatchWrapper.js"
 
@@ -17,9 +17,16 @@ export const redirectFromShortUrl = wrapAsync(async (req, res) => {
     // id === short_url
     const { id } = req.params;
     const url = await getShortUrl(id);
+
     if (!url) {
         throw new Error("Short URL not found");
         // res.status(404).send("URL Not Found");
+    }
+
+    if (new Date() > url.expiresAt) {
+        await deleteShortUrlById(url._id);
+        throw new Error("This short URL has expired.");
+        // return res.status(410).json({ message: "This short URL has expired." });
     }
     res.redirect(url.original_url);
 });
