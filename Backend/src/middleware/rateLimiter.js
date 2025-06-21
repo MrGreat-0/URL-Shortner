@@ -6,6 +6,6 @@ export const urlCreationRateLimiter = rateLimit({
     keyGenerator: (req) => (req.user ? String(req.user._id) : req.ip),
     message: {
         status: 429,
-        message: "Too many URL creations. Please try again after 24 hours.",
+        message: "Too many URL creations. Please try again.",
     },
 });
