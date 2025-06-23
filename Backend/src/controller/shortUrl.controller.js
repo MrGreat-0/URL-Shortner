@@ -18,15 +18,13 @@ export const redirectFromShortUrl = wrapAsync(async (req, res) => {
     const { id } = req.params;
     const url = await getShortUrl(id);
 
-    if (!url) {
-        throw new Error("Short URL not found");
-        // res.status(404).send("URL Not Found");
-    }
-
-    if (new Date() > url.expiresAt) {
-        await deleteShortUrlById(url._id);
-        throw new Error("This short URL has expired.");
+    if (!url || new Date() > url.expiresAt) {
+        deleteShortUrlById(url._id);
+        return res.status(410).render("error", {
+            message: "This short URL has expired or is no longer available.",
+        });
         // return res.status(410).json({ message: "This short URL has expired." });
+        // throw new Error("This short URL has expired.");
     }
     res.redirect(url.original_url);
 });

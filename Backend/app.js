@@ -10,7 +10,13 @@ import cors from "cors";
 import { attachUser } from "./src/utils/attachUser.js";
 import cookieParser from "cookie-parser"
 
+import path from "path";
+import { fileURLToPath } from "url";
+
 dotenv.config("./.env");
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -18,6 +24,9 @@ app.use(cors({
     origin: 'https://urlshortner-jet.vercel.app', // your React app
     credentials: true // 👈 this allows cookies to be sent
 }));
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "src", "views"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
