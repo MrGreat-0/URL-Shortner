@@ -26,7 +26,10 @@ This is the **Node.js + Express** backend for the URL Shortener app. It handles 
  ┃ ┃ ┣ 📜shortUrl.js
  ┃ ┃ ┗ 📜user.dao.js
  ┃ ┣ 📂middleware
- ┃ ┃ ┗ 📜auth.middleware.js
+ ┃ ┃ ┣ 📜auth.middleware.js
+ ┃ ┃ ┗ 📜rateLimiter.js
+ ┃ ┣ 📂views
+ ┃ ┣ ┗📜error.ejs
  ┃ ┣ 📂models
  ┃ ┃ ┣ 📜shorturl.model.js
  ┃ ┃ ┗ 📜user.model.js
@@ -59,6 +62,12 @@ This is the **Node.js + Express** backend for the URL Shortener app. It handles 
   APP_URL=http://localhost:5000
   NODE_ENV=development or production
   ```
+
+### 🧠 Expiration & Rate Limit Logic
+
+- Rate limit per IP or `req.user._id`, defined in `rateLimiter.js`.
+- `expiresAt` field is saved on short URL creation and checked during redirection.
+- `redirectFromShortUrl` deletes expired URLs before rendering `error.ejs`.
 
 ## 🔐 Authentication Overview
 
@@ -121,6 +130,11 @@ This is the **Node.js + Express** backend for the URL Shortener app. It handles 
 - Auth routes rely on HTTP-only cookies for session management.
 - `authMiddleware` is used to protect `/me`, `/logout`, and all `/user` routes.
 - Route: `/[:slug]` is public and handles redirecting based on the shortened ID.
+- ✂️ **Rate Limiting** is implemented via IP or user-based tracking using `express-rate-limit`.
+- ⏳ **Short URL expiration**:
+  - Unauthenticated users: 30-day expiry
+  - Authenticated users: 7-day expiry
+  - Expired links trigger cleanup and return a rendered `error.ejs` page.
 
 ## 🧪 Error Handling
 

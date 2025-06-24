@@ -26,16 +26,19 @@ This is the React-based frontend for the URL Shortener application. It manages a
  ┃ ┃ ┣ 📜LoginForm.jsx
  ┃ ┃ ┣ 📜NavBar.jsx
  ┃ ┃ ┣ 📜RegisterForm.jsx
+ ┃ ┃ ┣ 📜Spinner.jsx
  ┃ ┃ ┣ 📜UrlForm.jsx
  ┃ ┃ ┗ 📜UserUrl.jsx
  ┃ ┣ 📂pages
  ┃ ┃ ┣ 📜AuthPage.jsx
  ┃ ┃ ┣ 📜DashboardPage.jsx
  ┃ ┃ ┗ 📜HomePage.jsx
+ ┃ ┃ ┗ 📜NotFoundPage.jsx
  ┃ ┣ 📂routing
  ┃ ┃ ┣ 📜auth.route.js
  ┃ ┃ ┣ 📜dashboard.js
  ┃ ┃ ┣ 📜homepage.js
+ ┃ ┃ ┣ 📜notFound.js
  ┃ ┃ ┣ 📜redirectIfAuthenticated.js
  ┃ ┃ ┗ 📜routeTree.js
  ┃ ┣ 📂store
@@ -67,6 +70,12 @@ This is the React-based frontend for the URL Shortener application. It manages a
   ```env
   VITE_API_BASE_URL=http://localhost:5000
   ```
+
+### 🧠 Error Display & UX
+
+- `NotFoundPage.jsx` displays user-friendly 404s for unknown frontend routes.
+- Global loading spinner added for route transitions (`defaultPendingComponent`).
+- `AuthLoader.jsx` handles session validation and shows spinner while checking.
 
 ## 🌐 Frontend API Usage
 

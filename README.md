@@ -58,6 +58,12 @@ Also make sure you have a `.env` file (see [Frontend/README.md](https://github.c
     ✅ Auto logout on session expiry (via Axios interceptor)
 
     ✅ Seamless redirection using /:slug route
+
+    🚫 Rate limiting on URL creation (based on IP or user)
+
+    ⏳ Expiration logic for short URLs (30 days for guests, 7 days for users)
+
+    🧱 Friendly 404 and Expired Link Error Page (via EJS + frontend route)
 ```
 
 ### 📁 Read More
@@ -80,12 +86,18 @@ Also make sure you have a `.env` file (see [Frontend/README.md](https://github.c
 
 ```
 
+## 🧠 Developer Notes
+
+- Error handling is unified:
+  - Frontend handles unknown routes via `NotFoundPage.jsx`
+  - Backend uses `error.ejs` to show expired or invalid short links
+- Rate limiter is configurable per user/IP using `express-rate-limit`
+- Expired short URLs are automatically deleted on visit
+
 ## ✅ TODOs / Ideas
 
 - 📊 Add click analytics per shortened URL (IP, referrer, timestamp, etc.)
 - 🔁 Add refresh token support for longer sessions
-- 🚫 Add rate limiting on URL creation (per IP or user)
-- ⏳ Add expiration time for short URLs (for unauthenticated users)
 - 🛠️ Add admin panel to manage all links (view, delete, moderate)
 
 ## 🌐 Visit the App
