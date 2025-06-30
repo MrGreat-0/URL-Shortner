@@ -132,7 +132,7 @@ This is the **Node.js + Express** backend for the URL Shortener app. It handles 
 - Route: `/[:slug]` is public and handles redirecting based on the shortened ID.
 - ✂️ **Rate Limiting** is implemented via IP or user-based tracking using `express-rate-limit`.
 - ⏳ **Short URL expiration**:
-  - Unauthenticated users: 30-day expiry
+  - Unauthenticated users: 3-day expiry
   - Authenticated users: 7-day expiry
   - Expired links trigger cleanup and return a rendered `error.ejs` page.
 
