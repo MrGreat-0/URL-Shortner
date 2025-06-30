@@ -61,7 +61,7 @@ Also make sure you have a `.env` file (see [Frontend/README.md](https://github.c
 
     🚫 Rate limiting on URL creation (based on IP or user)
 
-    ⏳ Expiration logic for short URLs (30 days for guests, 7 days for users)
+    ⏳ Expiration logic for short URLs (3 days for guests, 7 days for logged-in users)
 
     🧱 Friendly 404 and Expired Link Error Page (via EJS + frontend route)
 ```
